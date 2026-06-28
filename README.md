@@ -1,66 +1,203 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AbsoluteCinema
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+AbsoluteCinema - веб-приложение для сети кинотеатров. Проект закрывает основной пользовательский сценарий: от просмотра афиши и выбора сеанса до оформления заказа и скачивания PDF-билета. Для управления контентом и сущностями подключена админ-панель на MoonShine.
 
-## About Laravel
+## Что уже реализовано
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- главная страница с последним добавленным релизом
+- каталог фильмов с постерами, описанием и длительностью
+- выбор кинотеатра для конкретного фильма
+- просмотр доступных сеансов
+- выбор мест в зале с визуальными статусами
+- оформление заказа через форму оплаты
+- создание билета после успешной оплаты
+- генерация и скачивание PDF-билета
+- форма обратной связи с сохранением сообщений в базу
+- административная панель на `/admin`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Пользовательский сценарий
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Пользователь открывает главную страницу и видит актуальный релиз.
+2. Переходит в каталог фильмов.
+3. Выбирает фильм и получает список кинотеатров, где он идет.
+4. Открывает список сеансов выбранного кинотеатра.
+5. Выбирает места в зале.
+6. Переходит к оплате и подтверждает заказ.
+7. После успешной оплаты получает страницу подтверждения и PDF-билет.
 
-## Learning Laravel
+## Стек
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- `PHP 8.1+`
+- `Laravel 10`
+- `Inertia.js`
+- `Vue 3`
+- `Vite`
+- `Tailwind CSS`
+- `MoonShine 2`
+- `barryvdh/laravel-dompdf`
+- `MySQL`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Основные модули
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Публичная часть
 
-## Laravel Sponsors
+- главная страница
+- каталог фильмов
+- выбор кинотеатра по фильму
+- список сеансов
+- схема мест и выбор мест
+- страница оплаты
+- страница успешной покупки
+- страница контактов
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Админ-панель
 
-### Premium Partners
+В MoonShine настроены ресурсы для:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- кинотеатров
+- залов
+- фильмов
+- сеансов
+- мест
+- билетов
+- связей билет-место
+- сообщений из формы контактов
+- администраторов и ролей MoonShine
 
-## Contributing
+## Предметная модель
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ключевые сущности проекта:
 
-## Code of Conduct
+- `Cinema`
+- `Hall`
+- `Movie`
+- `Session`
+- `Seat`
+- `Ticket`
+- `TicketSeat`
+- `ContactMessage`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Основные связи:
 
-## Security Vulnerabilities
+- кинотеатр содержит несколько залов и сеансов
+- зал содержит места и сеансы
+- фильм имеет несколько сеансов
+- сеанс связан с фильмом, залом и кинотеатром
+- билет связан с сеансом и местами через таблицу `ticket_seats`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Структура проекта
 
-## License
+```text
+app/
+  Http/Controllers/      логика фильмов, сеансов, оплаты, контактов и билетов
+  Models/                модели и связи предметной области
+  MoonShine/Resources/   ресурсы админ-панели
+database/
+  migrations/            схема кинотеатров, залов, фильмов, сеансов, мест, билетов и контактов
+  factories/             фабрики тестовых данных
+  seeders/               наполнение демо-данными
+resources/
+  js/pages/              Inertia/Vue-страницы
+  js/Components/         переиспользуемые компоненты интерфейса
+  views/pdf/             Blade-шаблоны для PDF-билета
+routes/
+  web.php                публичные маршруты и сценарий бронирования
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Запуск локально
+
+### 1. Установка зависимостей
+
+```bash
+composer install
+npm install
+```
+
+### 2. Подготовка окружения
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Настройте подключение к базе данных в `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=absolute_cinema
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 3. Миграции и демо-данные
+
+```bash
+php artisan migrate --seed
+```
+
+Сидер создает:
+
+- кинотеатры
+- залы
+- фильмы
+- сеансы
+- места
+
+### 4. Запуск приложения
+
+В отдельных терминалах:
+
+```bash
+php artisan serve
+```
+
+```bash
+npm run dev
+```
+
+После запуска:
+
+- пользовательская часть: `http://127.0.0.1:8000`
+- админ-панель: `http://127.0.0.1:8000/admin`
+
+## Важные маршруты
+
+- `/` - главная страница
+- `/movies` - каталог фильмов
+- `/movies/{movie}/cinemas` - кинотеатры для выбранного фильма
+- `/cinemas/{cinema}/sessions` - сеансы выбранного кинотеатра
+- `/sessions/{session}/seats` - выбор мест
+- `/payment` - оформление заказа
+- `/contacts` - страница контактов
+- `/tickets/{ticket}/download` - скачивание PDF-билета
+- `/admin` - MoonShine
+
+## Особенности текущей реализации
+
+- оплата сейчас реализована как внутренний сценарий без интеграции с внешним платежным шлюзом
+- после покупки выбранные места сразу получают статус `sold`
+- PDF формируется через `dompdf`
+- форма контактов сохраняет обращения в базу данных
+- в проекте уже есть фабрики и сидер, поэтому локальный стенд поднимается быстро
+
+## Полезные команды
+
+```bash
+php artisan migrate:fresh --seed
+php artisan test
+npm run build
+```
+
+## Что логично развивать дальше
+
+- подключить реальный платежный шлюз
+- отправлять билет на почту после покупки
+- добавить блокировку мест на время оформления заказа
+- расширить фильтрацию по датам, жанрам и кинотеатрам
+- покрыть пользовательский сценарий feature-тестами
+
+## Лицензия
+
+Проект распространяется в учебных и портфолио-целях. Перед коммерческим использованием стоит проверить политику репозитория и права на контент.
