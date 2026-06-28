@@ -1,6 +1,17 @@
+<p align="center">
+  <img src="public/icons/film-icon.png" alt="AbsoluteCinema logo" width="96">
+</p>
+
 # AbsoluteCinema
 
 AbsoluteCinema - веб-приложение для сети кинотеатров. Проект закрывает основной пользовательский сценарий: от просмотра афиши и выбора сеанса до оформления заказа и скачивания PDF-билета. Для управления контентом и сущностями подключена админ-панель на MoonShine.
+
+## Визуальные материалы
+
+<p align="center">
+  <img src="public/icons/placeholder.jpg" alt="AbsoluteCinema preview" width="340">
+  <img src="public/vendor/moonshine/avatar.jpg" alt="MoonShine admin preview" width="340">
+</p>
 
 ## Что уже реализовано
 
